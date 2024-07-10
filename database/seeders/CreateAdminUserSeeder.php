@@ -14,21 +14,26 @@ class CreateAdminUserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create a new user
-        $user = User::create([
-            'name' => 'Glenben Ngugi', 
-            'email' => 'gn782000@gmail.com',
-            'password' => bcrypt('g1l2e3n4')
-        ]);
+        // Check if the user already exists
+        $user = User::firstOrCreate(
+            ['email' => 'gn782000@gmail.com'], // Check for existing user by email
+            [
+                'name' => 'Glenben Ngugi',
+                'password' => bcrypt('g1l2e3n4')
+            ]
+        );
 
-        // Create a new role
-        $role = Role::create(['name' => 'SuperAdmin']);
-        $superuserRole = Role::where('name', 'SuperAdmin')->first();
-        $user->assignRole($superuserRole);
-
+        // Ensure the role exists
+        $role = Role::firstOrCreate(['name' => 'SuperAdmin']);
 
         // Define specific permissions for the Admin role
         $permissions = [
+            'view-user',
+            'create-user',
+            'update-user',
+            'delete-user',
+            'deactivate-user',
+            'system-update',
             'role-list',
             'role-create',
             'role-edit',
@@ -36,7 +41,10 @@ class CreateAdminUserSeeder extends Seeder
             'product-list',
             'product-create',
             'product-edit',
-            'product-delete'
+            'product-delete',
+            'post-job',
+            'manage-job-postings',
+            'moderate-content'
         ];
 
         // Assign the permissions to the role
