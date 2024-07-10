@@ -24,6 +24,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
+    
+});
+Route::group(['middleware' => ['role:SuperAdmin']], function() {
+    Route::get('/users', [UserController::class, 'index'])->name('users.index');
+    Route::post('/users/deactivate/{id}', [UserController::class, 'deactivate'])->name('users.deactivate');
+    Route::put('users/{id}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
+
 });
     
 

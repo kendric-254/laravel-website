@@ -137,4 +137,24 @@ class UserController extends Controller
         return redirect()->route('users.index')
                         ->with('success','User deleted successfully');
     }
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('permission:deactivate-user', ['only' => ['deactivate']]);
+    }
+    public function deactivate($id)
+    {
+        $user = User::find($id);
+
+        if ($user) {
+            $user->active = false;
+            $user->save();
+
+            return redirect()->back()->with('success', 'User deactivated successfully');
+        }
+
+        return redirect()->back()->with('error', 'User not found');
+    }
+
+
 }
