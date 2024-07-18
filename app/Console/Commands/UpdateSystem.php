@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 class UpdateSystem extends Command
 {
     //protected $signature = 'system:update';
-   // protected $description = 'Perform system updates';
+    protected $description = 'Perform system updates';
 
    public function __construct()
    {
@@ -25,7 +25,7 @@ class UpdateSystem extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    //protected $description = 'Command description';
 
     /**
      * Execute the console command.

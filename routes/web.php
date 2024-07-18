@@ -50,5 +50,7 @@ Route::group(['middleware' => ['auth', 'system-update']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('jobs', JobController::class);
+    Route::get('/jobs', [JobController::class, 'publicIndex'])->name('jobs.publicIndex');
+
 });
 

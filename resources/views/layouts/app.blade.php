@@ -7,8 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-
+    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
+    <title>INSTITUTE OF SOFTWARE TECHNOLOGIES</title>
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
@@ -70,12 +70,26 @@
                                         @csrf
                                     </form>
                                 </div>
+
                             </li>
                         @endguest
+
+                        @auth
+                            @can('post-job')
+                            <li>
+                                <a href="{{route(jobs.create)}}">Post a <span>Job</span></a>
+                            </li>
+                                
+                            @endcan
+                            @can('manage-job-posting')
+                            <a href="{{route(jobs.index)}}">Manage <span>Jobs</span></a>                                
+                            @endcan
+                        @endauth
                     </ul>
                 </div>
             </div>
         </nav>
+        
 
         <main class="py-4">
             <div class="container">

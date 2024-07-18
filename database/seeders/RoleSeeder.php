@@ -20,15 +20,18 @@ class RoleSeeder extends Seeder
             'update-user',
             'delete-user',
             'deactivate-user',
+            'system-update',
             'role-list',
-           'role-create',
-           'role-edit',
-           'role-delete',
-           'product-list',
-           'product-create',
-           'product-edit',
-           'product-delete',
-            
+            'role-create',
+            'role-edit',
+            'role-delete',
+            'product-list',
+            'product-create',
+            'product-edit',
+            'product-delete',
+            'post-job',
+            'manage-job-postings',
+            'moderate-content'
         ];
 
         $superuser = Role::create(['name' => 'SuperAdmin']);
