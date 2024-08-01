@@ -18,6 +18,7 @@ class RoleSeeder extends Seeder
             'update-user',
             'delete-user',
             'deactivate-user',
+            'reactivate-user',
             'system-update',
             'role-list',
             'role-create',
@@ -36,7 +37,7 @@ class RoleSeeder extends Seeder
         $superuser->syncPermissions($superAdminPermissions);
 
         $role = Role::findByName('superAdmin'); 
-        $role->givePermissionTo('deactivate-user');
+        $role->givePermissionTo('deactivate-user','reactivate-user');
 
         Role::firstOrCreate(['name' => 'Admin']);
         Role::firstOrCreate(['name' => 'writer']);

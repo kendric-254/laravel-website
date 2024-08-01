@@ -159,6 +159,28 @@ class UserController extends Controller
         // If the user was not found
         return redirect()->back()->with('error', 'User not found.');
     }
+
+     /**
+     * Reactivate a user.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\RedirectResponse
+     * 
+     */
+    public function reactivate($id): RedirectResponse
+    {
+        $user=User::find($id);
+        if($user){
+        $user->active = true;
+        $user->save();
+        return redirect()->back()->with('success', 'User reactivated successfully.');
+        }
+        return redirect()->back()->with('error', 'User not found.');
+        
+
+    }
+    
+    
     
 
 }

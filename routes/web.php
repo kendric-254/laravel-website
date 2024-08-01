@@ -81,3 +81,8 @@ Route::middleware(['auth', 'check.active'])->group(function () {
 // Route::post('/update-profile', [ProfileController::class, 'update'])
 // ->middleware(['auth', 'check.active'])
 // ->name('profile.update');--if i want per individual but lets stick to the groupwise
+
+// *reactivate user routes
+Route::middleware(['auth', 'can:reactivate-user'])->group(function () {
+    Route::post('/users/{user}/reactivate', [UserController::class, 'reactivate'])->name('users.reactivate');
+});

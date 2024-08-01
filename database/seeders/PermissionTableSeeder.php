@@ -18,6 +18,7 @@ class PermissionTableSeeder extends Seeder
             'update-user',
             'delete-user',
             'deactivate-user',
+            'reactivate-user',
             'system-update',
             'role-list',
             'role-create',
