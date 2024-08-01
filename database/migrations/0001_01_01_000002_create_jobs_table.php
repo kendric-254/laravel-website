@@ -11,7 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
+        // Create jobs table
         Schema::create('jobs', function (Blueprint $table) {
+            $table->id();
+            $table->string('title');
+            $table->text('description');
+            $table->timestamps();
+        });
+
+        // Create queue jobs table
+        Schema::create('jobs_queue', function (Blueprint $table) {
             $table->id();
             $table->string('queue')->index();
             $table->longText('payload');
@@ -21,6 +30,7 @@ return new class extends Migration
             $table->unsignedInteger('created_at');
         });
 
+        // Create job_batches table
         Schema::create('job_batches', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('name');
@@ -34,6 +44,7 @@ return new class extends Migration
             $table->integer('finished_at')->nullable();
         });
 
+        // Create failed_jobs table
         Schema::create('failed_jobs', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique();
@@ -50,8 +61,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('jobs');
-        Schema::dropIfExists('job_batches');
+        // Drop all tables in the reverse order of creation
         Schema::dropIfExists('failed_jobs');
+        Schema::dropIfExists('job_batches');
+        Schema::dropIfExists('jobs_queue');
+        Schema::dropIfExists('jobs');
     }
 };

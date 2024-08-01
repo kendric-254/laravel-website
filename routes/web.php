@@ -7,7 +7,8 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomValidationController; 
-
+use App\Http\Controllers\SystemSettingsController;
+use App\Http\Controllers\SystemController;
 use App\Http\Controllers\JobController;
 
 //customvalidation  
@@ -53,4 +54,15 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/jobs', [JobController::class, 'publicIndex'])->name('jobs.publicIndex');
 
 });
+//hapa napo ni pa the -temporary debug statement to list the authenticated user's roles and permissions.
+Route::get('/debug/permissions', function() {
+    $user = auth()->user();
+    return response()->json([
+        'roles' => $user->roles->pluck('name'),
+        'permissions' => $user->getAllPermissions()->pluck('name')
+    ]);
+});
 
+ Route::middleware(['auth', 'superadmin'])->group(function () {
+ Route::post('/users/{user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
+    });

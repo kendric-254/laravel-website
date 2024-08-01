@@ -4,8 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-use Spatie\Permission\Models\Permission;
 
 class RoleSeeder extends Seeder
 {
@@ -34,14 +32,15 @@ class RoleSeeder extends Seeder
             'moderate-content'
         ];
 
-        $superuser = Role::create(['name' => 'SuperAdmin']);
+        $superuser = Role::firstOrCreate(['name' => 'SuperAdmin']);
         $superuser->syncPermissions($superAdminPermissions);
 
-        
-         Role::create(['name' => 'Admin']);
-         Role::create(['name' => 'SuperAdmin']);
-         Role::create(['name' => 'writer']);
-         Role::create(['name' => 'user']);
-         Role::create(['name' => 'Alumni']);
+        $role = Role::findByName('superAdmin'); 
+        $role->givePermissionTo('deactivate-user');
+
+        Role::firstOrCreate(['name' => 'Admin']);
+        Role::firstOrCreate(['name' => 'writer']);
+        Role::firstOrCreate(['name' => 'user']);
+        Role::firstOrCreate(['name' => 'Alumni']);
     }
 }

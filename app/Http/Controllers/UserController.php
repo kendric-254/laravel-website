@@ -142,19 +142,23 @@ class UserController extends Controller
         $this->middleware('auth');
         $this->middleware('permission:deactivate-user', ['only' => ['deactivate']]);
     }
-    public function deactivate($id)
+    public function deactivate($id): RedirectResponse
     {
+        // Attempt to find the user by ID
         $user = User::find($id);
-
+    
+        // Check if the user exists
         if ($user) {
+            // Deactivate the user
             $user->active = false;
             $user->save();
-
-            return redirect()->back()->with('success', 'User deactivated successfully');
+    
+            return redirect()->back()->with('success', 'User deactivated successfully.');
         }
-
-        return redirect()->back()->with('error', 'User not found');
+    
+        // If the user was not found
+        return redirect()->back()->with('error', 'User not found.');
     }
-
+    
 
 }
