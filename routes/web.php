@@ -66,3 +66,18 @@ Route::get('/debug/permissions', function() {
  Route::middleware(['auth', 'superadmin'])->group(function () {
  Route::post('/users/{user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
     });
+
+  
+Route::middleware(['auth', 'check.active'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
+    // authentication and activation check
+});
+
+// Route::get('/admin', [AdminController::class, 'index'])
+// ->middleware(['auth', 'check.active'])
+// ->name('admin.index');
+
+// Route::post('/update-profile', [ProfileController::class, 'update'])
+// ->middleware(['auth', 'check.active'])
+// ->name('profile.update');--if i want per individual but lets stick to the groupwise
