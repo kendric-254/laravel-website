@@ -25,6 +25,32 @@
             {{ $product->detail }}
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Image:</strong>
+                @if ($product->image)
+                    <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="img-fluid">
+                @else
+                    <p>No image available</p>
+                @endif
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Name:</strong>
+                {{ $product->name }}
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Details:</strong>
+                {{ $product->detail }}
+            </div>
+        </div>
+    </div>
+    
 </div>
 
 <p class="text-center text-primary"><small>Glens project all right reserved</small></p>

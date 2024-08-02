@@ -14,11 +14,11 @@
     </div>
 </div>
 
-@session('success')
+@if (session('success'))
     <div class="alert alert-success" role="alert"> 
-        {{ $value }}
+        {{ session('success') }}
     </div>
-@endsession
+@endif
 
 <table class="table table-bordered">
     <tr>
@@ -33,10 +33,10 @@
         <td>{{ $product->name }}</td>
         <td>{{ $product->detail }}</td>
         <td>
-            <form action="{{ route('products.destroy',$product->id) }}" method="POST">
-                <a class="btn btn-info btn-sm" href="{{ route('products.show',$product->id) }}"><i class="fa-solid fa-list"></i> Show</a>
+            <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                <a class="btn btn-info btn-sm" href="{{ route('products.show', $product->id) }}"><i class="fa-solid fa-list"></i> Show</a>
                 @can('product-edit')
-                <a class="btn btn-primary btn-sm" href="{{ route('products.edit',$product->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                <a class="btn btn-primary btn-sm" href="{{ route('products.edit', $product->id) }}"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
                 @endcan
 
                 @csrf
@@ -53,5 +53,5 @@
 
 {!! $products->links() !!}
 
-<p class="text-center text-primary"><small>Glens project all right reserved</small></p>
+<p class="text-center text-primary"><small>Glen's project all rights reserved</small></p>
 @endsection

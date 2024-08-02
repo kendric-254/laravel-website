@@ -67,12 +67,14 @@ Route::get('/debug/permissions', function() {
  Route::post('/users/{user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
     });
 
-  
-Route::middleware(['auth', 'check.active'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
-    // authentication and activation check
-});
+    Route::middleware(['auth', 'check.active'])->group(function () {
+        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/dashboard/products/create', [DashboardController::class, 'createProduct'])->name('dashboard.products.create');
+        Route::post('/dashboard/products', [DashboardController::class, 'storeProduct'])->name('dashboard.products.store');
+        Route::get('/dashboard/roles/create', [DashboardController::class, 'createRole'])->name('dashboard.roles.create');
+        Route::post('/dashboard/roles', [DashboardController::class, 'storeRole'])->name('dashboard.roles.store');
+    });
+    
 
 // Route::get('/admin', [AdminController::class, 'index'])
 // ->middleware(['auth', 'check.active'])
