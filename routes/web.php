@@ -26,7 +26,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
   
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
-    Route::resource('users', UserController::class);
+    Route::resource('users', UserController::class); 
     Route::resource('products', ProductController::class);
     
 });
@@ -67,13 +67,13 @@ Route::get('/debug/permissions', function() {
  Route::post('/users/{user}/deactivate', [UserController::class, 'deactivate'])->name('users.deactivate');
     });
 
-    Route::middleware(['auth', 'check.active'])->group(function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        Route::get('/dashboard/products/create', [DashboardController::class, 'createProduct'])->name('dashboard.products.create');
-        Route::post('/dashboard/products', [DashboardController::class, 'storeProduct'])->name('dashboard.products.store');
-        Route::get('/dashboard/roles/create', [DashboardController::class, 'createRole'])->name('dashboard.roles.create');
-        Route::post('/dashboard/roles', [DashboardController::class, 'storeRole'])->name('dashboard.roles.store');
-    });
+    // Route::middleware(['auth', 'check.active'])->group(function () {
+    //     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    //     Route::get('/dashboard/products/create', [DashboardController::class, 'createProduct'])->name('dashboard.products.create');
+    //     Route::post('/dashboard/products', [DashboardController::class, 'storeProduct'])->name('dashboard.products.store');
+    //     Route::get('/dashboard/roles/create', [DashboardController::class, 'createRole'])->name('dashboard.roles.create');
+    //     Route::post('/dashboard/roles', [DashboardController::class, 'storeRole'])->name('dashboard.roles.store');
+    // });
     
 
 // Route::get('/admin', [AdminController::class, 'index'])
